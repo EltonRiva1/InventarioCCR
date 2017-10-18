@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             xmlns:p="http://primefaces.org/ui"
+             template="template.xhtml"
+             xmlns:iccr="http://xmlns.jcp.org/jsf/composite/iccrcomp">
+    <h:form id="frm">
+        <p:fieldset legend="Gerenciar Notebooks">
+            <iccr:toolbarCrud crudBean="#{notebookBean}">
+                <p:commandButton value="PDF" ajax="false" rendered="#{notebookBean.busca == true}">
+                    <p:dataExporter type="pdf" target=":frm:tabelaNotebook" fileName="notebook"/>
+                </p:commandButton>
+            </iccr:toolbarCrud>
+            <p:panelGrid columns="4" rendered="#{notebookBean.busca == false}">
+                <h:outputLabel value="Fabricante"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.fabricante}"></p:inputText>
+                <h:outputLabel value="Modelo"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.modelo}"></p:inputText>
+                <h:outputLabel value="Hostname"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.hostName}"></p:inputText>
+                <h:outputLabel value="Serial Number"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.serialNumber}"></p:inputText>
+                <h:outputLabel value="BP"></h:outputLabel>
+                <p:inputMask mask="9999" value="#{notebookBean.entidade.bp}"></p:inputMask>
+                <h:outputLabel value="Site"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.site}"></p:inputText>
+                <h:outputLabel value="Localidade"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.localidade}"></p:inputText>
+                <h:outputLabel value="Usuário"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.usuario}"></p:inputText>
+                <h:outputLabel value="Chapa"></h:outputLabel>
+                <p:inputText value="#{notebookBean.entidade.chapa}"></p:inputText>
+                <h:outputLabel value="Ramal"></h:outputLabel>
+                <p:inputMask mask="(99)9999-9999" value="#{notebookBean.entidade.ramal}"></p:inputMask>
+            </p:panelGrid>
+            <p:dataTable id="tabelaNotebook" value="#{notebookBean.entidades}" var="notebook" rendered="#{notebookBean.busca == true}">
+                <p:column exportable="false">
+                    <p:commandButton value="Editar" icon="ui-icon-pencil" action="#{notebookBean.editar(notebook)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" icon="ui-icon-close" action="#{notebookBean.deletar(notebook)}" update="@form">
+                        <p:confirm message="Têm certeza que deseja excluir?" header="Aviso!" icon="ui-icon-alert"></p:confirm>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Fabricante" sortBy="#{notebook.fabricante}">
+                    <h:outputText value="#{notebook.fabricante}"></h:outputText>
+                </p:column>
+                <p:column headerText="Modelo" sortBy="#{notebook.modelo}">
+                    <h:outputText value="#{notebook.modelo}"></h:outputText>
+                </p:column>
+                <p:column headerText="Hostname" sortBy="#{notebook.hostName}" filterBy="#{notebook.hostName}">
+                    <h:outputText value="#{notebook.hostName}"></h:outputText>
+                </p:column>
+                <p:column headerText="Serial Number" sortBy="#{notebook.serialNumber}">
+                    <h:outputText value="#{notebook.serialNumber}"></h:outputText>
+                </p:column>
+                <p:column headerText="BP" sortBy="#{notebook.bp}">
+                    <h:outputText value="#{notebook.bp}"></h:outputText>
+                </p:column>
+                <p:column headerText="Site" sortBy="#{notebook.site}">
+                    <h:outputText value="#{notebook.site}"></h:outputText>
+                </p:column>
+                <p:column headerText="Localidade" sortBy="#{notebook.localidade}">
+                    <h:outputText value="#{notebook.localidade}"></h:outputText>
+                </p:column>
+                <p:column headerText="Usuário" sortBy="#{notebook.usuario}">
+                    <h:outputText value="#{notebook.usuario}"></h:outputText>
+                </p:column>
+                <p:column headerText="Chapa" sortBy="#{notebook.chapa}">
+                    <h:outputText value="#{notebook.chapa}"></h:outputText>
+                </p:column>
+                <p:column headerText="Ramal" sortBy="#{notebook.ramal}">
+                    <h:outputText value="#{notebook.ramal}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>
+

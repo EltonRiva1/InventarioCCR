@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sistema de InventárioCCR</title>
+    </h:head>
+    <h:body style="background: url(resources/imagens/ccr.jpg); background-repeat: no-repeat; background-position: top;"> 
+        <h:panelGrid columns="2">
+            <h:graphicImage library="imagens" name="ccrMetroBahia.png" width="150px"></h:graphicImage>
+            <h1>Sistema de InventárioCCR</h1>
+        </h:panelGrid>     
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Home" url="index.jsf" icon="ui-icon-home"></p:menuitem>
+                <p:submenu label="Gerenciar" icon="ui-icon-gear">
+                    <p:menuitem value="Computador" url="gerenciar-computador.jsf"></p:menuitem>
+                    <p:menuitem value="Impressora" url="gerenciar-impressora.jsf"></p:menuitem>
+                    <p:menuitem value="Notebook" url="gerenciar-notebook.jsf"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Ajuda" icon="ui-icon-help">
+                    <p:menuitem value="Sobre" onclick="PF('dialogsobre').show()"></p:menuitem>
+                </p:submenu>
+            </p:menubar>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" type="button"></p:commandButton>
+                <p:commandButton value="Não" styleClass="ui-confirmdialog-no" type="button"></p:commandButton>
+            </p:confirmDialog>
+            <p:growl id="message" autoUpdate="true"/>
+            <p:dialog header="Sobre o Sistema" widgetVar="dialogsobre" modal="true">
+                <h1>Versão do sistema: 1.0</h1>
+                <h2>Autor: Elton Riva</h2>
+                <h3>Chapa: 39-01424</h3>
+            </p:dialog>
+        </h:form>
+        <hr/>
+        <ui:insert></ui:insert>
+    </h:body>
+</html>

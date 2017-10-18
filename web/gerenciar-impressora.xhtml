@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:iccr="http://xmlns.jcp.org/jsf/composite/iccrcomp">
+    <h:form id="frm">
+        <p:fieldset legend="Gerenciar Impressoras">
+            <iccr:toolbarCrud crudBean="#{impressoraBean}">
+                <p:commandButton value="PDF" ajax="false" rendered="#{impressoraBean.busca == true}">
+                    <p:dataExporter type="pdf" target=":frm:tabelaImpressora" fileName="impressora"/>
+                </p:commandButton>
+            </iccr:toolbarCrud>
+            <p:panelGrid columns="6" rendered="#{impressoraBean.busca == false}">
+                <h:outputLabel value="Fila"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.fila}"></p:inputText>
+                <h:outputLabel value="IP"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.ip}"></p:inputText>
+                <h:outputLabel value="Fabricante"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.fabricante}"></p:inputText>
+                <h:outputLabel value="Modelo"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.modelo}"></p:inputText>
+                <h:outputLabel value="Site"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.site}"></p:inputText>
+                <h:outputLabel value="Localidade"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.localidade}"></p:inputText>
+                <h:outputLabel value="Toner"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.toner}"></p:inputText>
+                <h:outputLabel value="Senha"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.senha}"></p:inputText>
+                <h:outputLabel value="Serial Number"></h:outputLabel>
+                <p:inputText value="#{impressoraBean.entidade.serialNumber}"></p:inputText>
+            </p:panelGrid>       
+            <p:dataTable id="tabelaImpressora" value="#{impressoraBean.entidades}" var="impressora" rendered="#{impressoraBean.busca == true}">
+                <p:column exportable="false">
+                    <p:commandButton value="Editar" icon="ui-icon-pencil" action="#{impressoraBean.editar(impressora)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" icon="ui-icon-close" action="#{impressoraBean.deletar(impressora)}" update="@form">
+                        <p:confirm message="Têm certeza que deseja excluir?" header="Aviso!" icon="ui-icon-alert"></p:confirm>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Fila" sortBy="#{impressora.fila}" filterBy="#{impressora.fila}">
+                    <h:outputText value="#{impressora.fila}"></h:outputText>
+                </p:column>
+                <p:column headerText="IP" sortBy="#{impressora.ip}">
+                    <h:outputText value="#{impressora.ip}"></h:outputText>
+                </p:column>
+                <p:column headerText="Fabricante" sortBy="#{impressora.fabricante}">
+                    <h:outputText value="#{impressora.fabricante}"></h:outputText>
+                </p:column>
+                <p:column headerText="Modelo" sortBy="#{impressora.modelo}">
+                    <h:outputText value="#{impressora.modelo}"></h:outputText>
+                </p:column>
+                <p:column headerText="Site" sortBy="#{impressora.site}">
+                    <h:outputText value="#{impressora.site}"></h:outputText>
+                </p:column>
+                <p:column headerText="Localidade" sortBy="#{impressora.localidade}">
+                    <h:outputText value="#{impressora.localidade}"></h:outputText>
+                </p:column>
+                <p:column headerText="Toner" sortBy="#{impressora.toner}">
+                    <h:outputText value="#{impressora.toner}"></h:outputText>
+                </p:column>
+                <p:column headerText="Senha" sortBy="#{impressora.senha}">
+                    <h:outputText value="#{impressora.senha}"></h:outputText>
+                </p:column>
+                <p:column headerText="Serial Number" sortBy="#{impressora.serialNumber}">
+                    <h:outputText value="#{impressora.serialNumber}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>
+
